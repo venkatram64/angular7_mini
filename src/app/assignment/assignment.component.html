@@ -1,0 +1,34 @@
+<!--div *ngFor="let assignment of assignments" 
+[ngStyle]="{'color':assignment.submitted === false ? 'red': 'green'}"-->
+<!--div *ngFor="let assignment of assignments" 
+[ngClass]="{'submitted':assignment.submitted === true,
+            'unsubmitted': assignment.submitted == false}"
+>
+  <p *ngIf="assignment.submitted; else unsubmitted">
+    Assignment {{assignment.name}} has been submitted.
+  </p>
+  <ng-template #unsubmitted>Assignment {{assignment.name}} hasn't been submitted.</ng-template>
+</div-->
+<main class="container" *ngIf="formVisible === false">
+  <button class="addBtn" 
+      mat-flat-button color="accent"
+      (click)="onAddBtnClick()">
+      Add assignment
+  </button>
+  <!--p>{{name}}</p>
+  <p>{{dueDate}}</p-->
+  <mat-list *ngFor="let assignment of assignments" >
+    <h3 mat-subheader>{{assignment.dueDate | date}} </h3>
+    <mat-list-item (click)="setSelected(assignment)">
+      <p appSubmitted *ngIf="assignment.submitted; else unsubmitted">
+        Assignment {{assignment.name}} has been submitted.
+      </p>
+      <ng-template #unsubmitted>Assignment {{assignment.name}} hasn't been submitted.</ng-template>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+</main>
+<app-add-assignment (newAssignment)="onNewAssignment($event)"
+      *ngIf="formVisible"></app-add-assignment>
+
+<app-assignment-details [passedAssignment]="selectedAssignment"></app-assignment-details>

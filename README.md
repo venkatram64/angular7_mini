@@ -25,3 +25,30 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+step 1: ng new my_app
+
+
+step 2: 
+npm install --save @angular/material @angular/cdk @angular/animations
+
+step 3: ng g c <name of the component>
+
+        ng g c --spec='false' <name of the component>
+
+step 4: create "shared" dir in src/app location
+ cd src\app\shared ng g d --spec='false' submitted
+
+ step 5: cd scr\app\assignment
+ ng g c assignment_details
+
+ step 6:at app level :
+ ng g c --spec="false" add-assignment
+
+ Creating Services:
+ step 1: go to shared folder
+ cd src\app\shared ng g s --spec='false' assignment
+
+ step 2: go to shared folder
+ cd src\app\shared ng g s --spec='false' logging
