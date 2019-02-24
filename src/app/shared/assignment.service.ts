@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Assignment}  from './../assignment/assignment.model';
 import {Observable, of} from 'rxjs';
+import { LoggingService } from './logging.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class AssignmentService {
       submitted: false
     }
   ]
-  constructor() { }
+  constructor(private loggingService: LoggingService) { }
 
   getAssignments(): Observable<Assignment[]>{
     return of(this.assignments);
@@ -27,6 +28,7 @@ export class AssignmentService {
 
   addAssignment(assignment: Assignment): Observable<string>{
     this.assignments.push(assignment);
+    this.loggingService.log(assignment.name, 'added');
     return of("assignment is added.");
   }
 
@@ -36,6 +38,7 @@ export class AssignmentService {
         this.assignments[i] = assignment;
       }
     });
+    this.loggingService.log(assignment.name, 'update');
     return of("updated the assignment!");
   }
 
@@ -45,6 +48,7 @@ export class AssignmentService {
         this.assignments.splice(i, 1);
       }
     });
+    this.loggingService.log(assignment.name, 'delete');
     return of("deleted the assignment!");
   }
 }
